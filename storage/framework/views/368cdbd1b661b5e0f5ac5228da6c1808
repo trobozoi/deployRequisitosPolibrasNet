@@ -1,0 +1,47 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>File</h1>
+<p class="lead">Index</p>
+<hr>
+<a class="btn btn-success" role="button" href="<?php echo URL::route('file.create'); ?>">Create New File</a>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>Version</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($files as $file): ?>
+		<tr>
+			<td><?php echo e($file->id); ?></td>
+			<td><?php echo e($file->name); ?></td>
+			<td><?php echo e($file->version->name); ?></td>
+			<td>
+				<a class="btn btn-info" role="button" href="<?php echo URL::route('file.show', $file->id); ?>">Show File</a>
+				<a class="btn btn-warning" role="button" href="<?php echo URL::route('file.edit', $file->id); ?>">Edit File</a>
+				<div class="pull-right">
+				<?php echo Form::open([
+					'method' => 'DELETE',
+					'route' => ['file.destroy', $file->id]
+				]); ?>
+
+				<?php echo Form::submit('Delete this File?', ['class' => 'btn btn-danger']); ?>
+
+				<?php echo Form::close(); ?>
+
+				</div>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+<?php echo $files->render(); ?>
+
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

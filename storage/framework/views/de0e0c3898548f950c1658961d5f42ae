@@ -1,0 +1,42 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>Edit a New Client</h1>
+<p class="lead">Edit to your Client list below.</p>
+<hr>
+
+<?php if(Session::has('flash_message')): ?>
+    <div class="alert alert-success">
+        <?php echo e(Session::get('flash_message')); ?>
+
+    </div>
+<?php endif; ?>
+
+<?php echo Form::open([
+	'method' => 'PATCH',
+    'route' => ['client.update', $client->id]
+]); ?>
+
+
+
+<div class="form-group">
+    <?php echo Form::label('name', 'Name:', ['class' => 'control-label']); ?>
+
+    <?php echo Form::text('name', $client->name, ['class' => 'form-control']); ?>
+
+</div>
+
+<div class="form-group">
+    <?php echo Form::label('version_id', 'Version:', ['class' => 'control-label']); ?>
+
+    <?php echo Form::select('version_id', $version, $client->version->id); ?>
+
+</div>
+
+<?php echo Form::submit('Update Client', ['class' => 'btn btn-primary']); ?>
+
+
+<?php echo Form::close(); ?>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

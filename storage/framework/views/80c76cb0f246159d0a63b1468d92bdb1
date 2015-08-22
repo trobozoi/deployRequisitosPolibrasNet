@@ -1,0 +1,42 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>Application</h1>
+<p class="lead">Id: <?php echo e($application->id); ?></p>
+<p class="lead">Name: <?php echo e($application->name); ?></p>
+<hr>
+
+<h2>Versions</h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($application->versions as $version): ?>
+		<tr>
+			<td><?php echo e($version->id); ?></td>
+			<td><?php echo e($version->name); ?></td>
+			<td>
+				<a class="btn btn-info" role="button" href="<?php echo URL::route('version.show', $version->id); ?>">Show Version</a>
+				<a class="btn btn-warning" role="button" href="<?php echo URL::route('version.edit', $version->id); ?>">Edit Version</a>
+				<div class="pull-right">
+				<?php echo Form::open([
+					'method' => 'DELETE',
+					'route' => ['version.destroy', $version->id]
+				]); ?>
+
+				<?php echo Form::submit('Delete this Version?', ['class' => 'btn btn-danger']); ?>
+
+				<?php echo Form::close(); ?>
+
+				</div>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

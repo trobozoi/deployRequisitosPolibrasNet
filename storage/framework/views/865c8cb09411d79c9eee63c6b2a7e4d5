@@ -1,0 +1,10 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>File</h1>
+<p class="lead">Id: <?php echo e($file->id); ?></p>
+<p class="lead">Name: <?php echo e($file->name); ?></p>
+<p class="lead">Version: <?php echo e($file->version->name); ?></p>
+<hr>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

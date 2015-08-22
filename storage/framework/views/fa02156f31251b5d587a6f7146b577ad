@@ -1,0 +1,78 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>Version</h1>
+<p class="lead">Id: <?php echo e($version->id); ?></p>
+<p class="lead">Name: <?php echo e($version->name); ?></p>
+<p class="lead">Application: <?php echo e($version->application->name); ?></p>
+<hr>
+
+<h2>Files</h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($version->files as $file): ?>
+		<tr>
+			<td><?php echo e($file->id); ?></td>
+			<td><?php echo e($file->name); ?></td>
+			<td>
+				<a class="btn btn-info" role="button" href="<?php echo URL::route('file.show', $file->id); ?>">Show File</a>
+				<a class="btn btn-warning" role="button" href="<?php echo URL::route('file.edit', $file->id); ?>">Edit File</a>
+				<div class="pull-right">
+				<?php echo Form::open([
+					'method' => 'DELETE',
+					'route' => ['file.destroy', $file->id]
+				]); ?>
+
+				<?php echo Form::submit('Delete this File?', ['class' => 'btn btn-danger']); ?>
+
+				<?php echo Form::close(); ?>
+
+				</div>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+
+<h2>Clients</h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($version->clients as $client): ?>
+		<tr>
+			<td><?php echo e($client->id); ?></td>
+			<td><?php echo e($client->name); ?></td>
+			<td>
+				<a class="btn btn-info" role="button" href="<?php echo URL::route('client.show', $client->id); ?>">Show Client</a>
+				<a class="btn btn-warning" role="button" href="<?php echo URL::route('client.edit', $client->id); ?>">Edit Client</a>
+				<div class="pull-right">
+				<?php echo Form::open([
+					'method' => 'DELETE',
+					'route' => ['client.destroy', $client->id]
+				]); ?>
+
+				<?php echo Form::submit('Delete this Client?', ['class' => 'btn btn-danger']); ?>
+
+				<?php echo Form::close(); ?>
+
+				</div>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

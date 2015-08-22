@@ -1,0 +1,36 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>Edit a New Application</h1>
+<p class="lead">Edit to your Application list below.</p>
+<hr>
+
+<?php if(Session::has('flash_message')): ?>
+    <div class="alert alert-success">
+        <?php echo e(Session::get('flash_message')); ?>
+
+    </div>
+<?php endif; ?>
+
+<?php echo Form::open([
+	'method' => 'PATCH',
+    'route' => ['application.update', $application->id]
+]); ?>
+
+
+
+<div class="form-group">
+    <?php echo Form::label('name', 'Name:', ['class' => 'control-label']); ?>
+
+    <?php echo Form::text('name', $application->name, ['class' => 'form-control']); ?>
+
+		
+</div>
+
+<?php echo Form::submit('Update Application', ['class' => 'btn btn-primary']); ?>
+
+
+<?php echo Form::close(); ?>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

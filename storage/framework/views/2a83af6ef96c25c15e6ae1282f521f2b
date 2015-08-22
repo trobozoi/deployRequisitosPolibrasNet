@@ -1,0 +1,45 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>Application</h1>
+<p class="lead">Index</p>
+<hr>
+<a class="btn btn-success" role="button" href="<?php echo URL::route('application.create'); ?>">Create New Application</a>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($applications as $application): ?>
+		<tr>
+			<td><?php echo e($application->id); ?></td>
+			<td><?php echo e($application->name); ?></td>
+			<td>
+				<a class="btn btn-info" role="button" href="<?php echo URL::route('application.show', $application->id); ?>">Show Application</a>
+				<a class="btn btn-warning" role="button" href="<?php echo URL::route('application.edit', $application->id); ?>">Edit Application</a>
+				<div class="pull-right">
+				<?php echo Form::open([
+					'method' => 'DELETE',
+					'route' => ['application.destroy', $application->id]
+				]); ?>
+
+				<?php echo Form::submit('Delete this Application?', ['class' => 'btn btn-danger']); ?>
+
+				<?php echo Form::close(); ?>
+
+				</div>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+<?php echo $applications->render(); ?>
+
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
